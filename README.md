@@ -20,4 +20,5 @@ This first commit contains the project configuration copied from the existing Fi
 - Detail actions connect to the shared plan and saved state, with duplicate protection, toasts, and the five-workout plan limit.
 - My Plan includes Today's Plan and Saved tabs, exercise/minute/calorie totals, search, sorting, completion toggles, and removal actions.
 - Empty lists, loading, API refresh failures, and the five-workout limit are handled in the plan view.
-- Custom error pages, verification, final documentation, and deployment are still pending. The app is not ready for submission.
+- Custom 404 and error recovery pages include links back to the library. The error recovery button uses Next.js retry to re-fetch and render the failed route.
+- Verification, final documentation, and deployment are still pending. The app is not ready for submission.
