@@ -1,0 +1,35 @@
+{
+  "name": "b14-a6-fitlog",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "serve out",
+    "typecheck": "next typegen && tsc --noEmit",
+    "test": "tsx --test tests/*.test.ts",
+    "format": "prettier --write app components context lib tests next.config.ts tsconfig.json postcss.config.mjs package.json"
+  },
+  "dependencies": {
+    "@fontsource-variable/inter": "5.3.0",
+    "@fontsource-variable/oswald": "5.3.0",
+    "lucide-react": "1.48.0",
+    "next": "16.3.6",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "sonner": "2.0.8",
+    "zod": "4.6.5"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.63.0",
+    "@tailwindcss/postcss": "4.3.3",
+    "@types/node": "26.6.3",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "prettier": "3.9.9",
+    "serve": "14.2.6",
+    "tailwindcss": "4.3.3",
+    "tsx": "4.23.15",
+    "typescript": "7.0.2"
+  }
+}
