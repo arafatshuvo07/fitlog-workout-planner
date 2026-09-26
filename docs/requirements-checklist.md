@@ -9,7 +9,7 @@ This checklist distinguishes implemented features from checks still needed on th
 | Next.js App Router and Tailwind styling | Implemented |
 | Navbar logo, active links, Plan/Saved badges and live counters | Implemented |
 | Required hero copy, icon CTA to #library, and banner image | Implemented |
-| API library with twelve cards and desktop three-column grid | Implemented; live rendering check pending |
+| API library with twelve cards and desktop three-column grid | Verified on the published site: twelve cards and three desktop columns |
 | Card images, tags, name, equipment and icon stats | Implemented |
 | Dynamic details with image, description, specs and instructions | Implemented; twelve detail routes exported successfully |
 | Add to Plan and Save actions with counters and toasts | Implemented |
@@ -17,11 +17,11 @@ This checklist distinguishes implemented features from checks still needed on th
 | View Details, completion and removal controls | Implemented |
 | Loading and required empty-state content | Implemented |
 | Footer branding and copyright | Implemented |
-| Mobile, tablet and desktop layouts | Styles implemented; new deployment checks pending |
-| Custom 404, loading animation and error recovery | Implemented; live checks pending |
-| Direct route reloads after deployment | Pending deployment |
-| At least eight meaningful commits | This documentation change is the eighth commit once committed |
-| Public deployment without errors | Pending deployment and verification |
+| Mobile, tablet and desktop layouts | Mobile and tablet layouts inspected; desktop grid measured; see verification notes |
+| Custom 404, loading animation and error recovery | Custom 404 and loading observed; error recovery implemented but not forced in production |
+| Direct route reloads after deployment | Detail and My Plan reloads verified on the published site |
+| At least eight meaningful commits | Satisfied: at least nine meaningful commits are already published |
+| Public deployment without errors | Published successfully; no console errors in the tested browser session |
 
 ## Challenge requirements
 
@@ -39,14 +39,16 @@ This checklist distinguishes implemented features from checks still needed on th
 | Search library and My Plan by name or tag | Implemented; search logic tests pass |
 | Disable Add when the plan has five workouts | Implemented; limit tests pass |
 
-## Checks still needed
+## Verification and submission
 
-- Publish the new repository and record the real live URL.
-- Check Home, all twelve Details routes, My Plan, and invalid routes.
-- Reload detail and plan routes directly on the published site.
-- Check Add/Save, counters, totals, both tabs, sorting, search, Done/Undo, removal, and persistence in the browser.
-- Inspect mobile/tablet/desktop layouts and compare them with the supplied design. Pixel-perfect parity has not been established.
-- Check API and image loading and browser console errors.
-- Submit both the new repository URL and verified live URL within the applicable deadline.
+- Published website: https://arafatshuvo07.github.io/fitlog-workout-planner/
+- Repository: https://github.com/arafatshuvo07/fitlog-workout-planner
+- Home, My Plan, all twelve detail routes, and invalid routes have been checked.
+- Add/Save, counters, totals, tabs, sorting, search, Done/Undo, removal, and reload persistence were exercised in the browser.
+- API loading, loaded images, and console output were inspected.
+- Mobile and tablet layouts were visually inspected; desktop layout was measured. Pixel-perfect parity with the supplied design has not been established.
+- The five-workout limit is covered by automated tests; the latest live session did not populate five entries.
+- Submission itself remains a user action: submit both links before the applicable deadline.
+- Technical checks do not establish compliance with the assignment's independent-work policy or guarantee a score.
 
-Local results and the API timeout encountered during the build are recorded in [verification.md](verification.md).
+See [verification.md](verification.md) for evidence, the build-time API timeout, and test limitations.

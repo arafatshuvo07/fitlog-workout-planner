@@ -5,7 +5,7 @@ FitLog is a Next.js workout library for choosing exercises, building a daily pla
 ## Project links
 
 - [GitHub repository](https://github.com/arafatshuvo07/fitlog-workout-planner)
-- [GitHub Pages website](https://arafatshuvo07.github.io/fitlog-workout-planner/) — publishing is handled by the workflow below; check the latest successful run before submitting.
+- [GitHub Pages website](https://arafatshuvo07.github.io/fitlog-workout-planner/)
 
 ## Features
 
@@ -101,7 +101,7 @@ The GitHub Actions workflow runs tests, checks types, builds the static export, 
 
 For domain-root static hosting, leave `NEXT_PUBLIC_BASE_PATH` empty, build the project, and publish `out/`. For this repository's GitHub Pages deployment, build with `NEXT_PUBLIC_BASE_PATH=/fitlog-workout-planner`. Configure the host to serve directory index files and the generated `404.html` so detail-page reloads work.
 
-Before submission, verify Home, Details, My Plan, direct route reloads, mobile layouts, API loading, and the browser console on the published site.
+Home, all twelve Details URLs, My Plan, direct detail/plan reloads, mobile/tablet layouts, API loading, and the browser console were checked on the published site. See [verification notes](docs/verification.md) for the scope and limitations. Submit the live and repository links before the applicable assignment deadline.
 
 ## Requirements and sources
 
