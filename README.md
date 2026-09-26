@@ -21,4 +21,5 @@ This first commit contains the project configuration copied from the existing Fi
 - My Plan includes Today's Plan and Saved tabs, exercise/minute/calorie totals, search, sorting, completion toggles, and removal actions.
 - Empty lists, loading, API refresh failures, and the five-workout limit are handled in the plan view.
 - Custom 404 and error recovery pages include links back to the library. The error recovery button uses Next.js retry to re-fetch and render the failed route.
-- Verification, final documentation, and deployment are still pending. The app is not ready for submission.
+- The 12 automated tests and TypeScript check pass. Production export passes with IPv4-first DNS ordering on this machine; see docs/verification.md for details.
+- Final documentation, deployment, and live browser checks are still pending. The app is not ready for submission.
