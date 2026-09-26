@@ -18,4 +18,6 @@ This first commit contains the project configuration copied from the existing Fi
 - Home now includes the hero, API workout cards, search, sorting, loading indicators, and a retry option for failed requests.
 - Dynamic workout details include the image, muscle groups, equipment, workout numbers, and step-by-step instructions. Detail routes fetch API data during the static build.
 - Detail actions connect to the shared plan and saved state, with duplicate protection, toasts, and the five-workout plan limit.
-- My Plan, custom error pages, and deployment are still pending. The app is not ready for submission.
+- My Plan includes Today's Plan and Saved tabs, exercise/minute/calorie totals, search, sorting, completion toggles, and removal actions.
+- Empty lists, loading, API refresh failures, and the five-workout limit are handled in the plan view.
+- Custom error pages, verification, final documentation, and deployment are still pending. The app is not ready for submission.
