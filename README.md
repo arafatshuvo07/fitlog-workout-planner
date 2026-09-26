@@ -16,4 +16,6 @@ This first commit contains the project configuration copied from the existing Fi
 - Shared layout, navigation, footer, fonts, and responsive styles have been copied from the existing project.
 - The shared plan state and workout helpers are included because the navigation uses the plan and saved counters.
 - Home now includes the hero, API workout cards, search, sorting, loading indicators, and a retry option for failed requests.
-- Workout details and My Plan pages are next. Their links are present, but those routes have not been copied yet. The app is not ready for deployment.
+- Dynamic workout details include the image, muscle groups, equipment, workout numbers, and step-by-step instructions. Detail routes fetch API data during the static build.
+- Detail actions connect to the shared plan and saved state, with duplicate protection, toasts, and the five-workout plan limit.
+- My Plan, custom error pages, and deployment are still pending. The app is not ready for submission.
