@@ -13,14 +13,10 @@ import {
   X,
 } from "lucide-react";
 import { usePlan, PLAN_LIMIT } from "@/context/plan-context";
-import {
-  fetchWorkouts,
-  filterAndSort,
-  type SortKey,
-  type Workout,
-} from "@/lib/workouts";
+import { filterAndSort, type SortKey, type Workout } from "@/lib/workouts";
 import { WorkoutImage } from "./workout-image";
 import { WorkoutStats } from "./workout-stats";
+import { loadCatalog } from "@/lib/workout-catalog";
 import { ListControls } from "./list-controls";
 import { LoadingWorkouts } from "./loading-workouts";
 
@@ -40,8 +36,12 @@ export function MyPlan() {
     const controller = new AbortController();
     setFetching(true);
     setFailed(false);
-    fetchWorkouts(controller.signal)
-      .then(setCatalog)
+    loadCatalog(controller.signal)
+      .then(({ workouts, source }) => {
+        if (controller.signal.aborted) return;
+        setCatalog(workouts);
+        setFailed(source === "saved");
+      })
       .catch(() => {
         if (!controller.signal.aborted) setFailed(true);
       })

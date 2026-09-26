@@ -2,20 +2,17 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { AlertCircle, RotateCcw } from "lucide-react";
-import {
-  fetchWorkouts,
-  filterAndSort,
-  type SortKey,
-  type Workout,
-} from "@/lib/workouts";
+import { filterAndSort, type SortKey, type Workout } from "@/lib/workouts";
 import { WorkoutImage } from "./workout-image";
 import { WorkoutStats } from "./workout-stats";
 import { LoadingWorkouts } from "./loading-workouts";
+import { loadCatalog } from "@/lib/workout-catalog";
 import { ListControls } from "./list-controls";
 export function Library() {
   const [workouts, setWorkouts] = useState<Workout[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [usingSaved, setUsingSaved] = useState(false);
   const [attempt, setAttempt] = useState(0);
   const [query, setQuery] = useState("");
   const [sort, setSort] = useState<SortKey>("duration");
@@ -24,8 +21,12 @@ export function Library() {
     const controller = new AbortController();
     setLoading(true);
     setError(false);
-    fetchWorkouts(controller.signal)
-      .then(setWorkouts)
+    loadCatalog(controller.signal)
+      .then(({ workouts, source }) => {
+        if (controller.signal.aborted) return;
+        setWorkouts(workouts);
+        setUsingSaved(source === "saved");
+      })
       .catch(() => {
         if (!controller.signal.aborted) setError(true);
       })
@@ -49,6 +50,16 @@ export function Library() {
           onSortChange={setSort}
         />
       </div>
+      {!loading && usingSaved && !error && (
+        <div className="refresh-notice" role="status">
+          Live workouts are temporarily unavailable. Showing the saved workout
+          library.
+          <button onClick={() => setAttempt((value) => value + 1)}>
+            <RotateCcw />
+            Refresh
+          </button>
+        </div>
+      )}
       {loading ? (
         <LoadingWorkouts cards />
       ) : error ? (

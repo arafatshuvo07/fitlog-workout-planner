@@ -17,7 +17,7 @@ FitLog is a Next.js workout library for choosing exercises, building a daily pla
 6. Search by workout name or muscle group and sort by duration, calories, or rating.
 7. Keep plan, saved, and completion state in localStorage across reloads.
 8. Prevent duplicates and limit Today's Plan to five workouts.
-9. Handle loading, empty lists, failed requests, and missing pages.
+9. Handle loading, empty lists, failed requests, and missing pages. Keep the library available during API outages using clearly labelled saved data.
 10. Use responsive layouts, keyboard-accessible controls, locally bundled fonts, and image fallbacks.
 
 ## Technologies
@@ -70,7 +70,7 @@ API endpoints:
 - All workouts: `https://api.abcz.workers.dev/api/fitlog`
 - One workout: `https://api.abcz.workers.dev/api/fitlog/:id`
 
-Home and My Plan fetch fresh data in the browser. Detail pages fetch data during the static build. Rebuild and redeploy when the API adds workouts or changes their details.
+Home and My Plan attempt the assignment API in the browser. If it is rate limited, unreachable, or returns invalid data, they use a validated snapshot of the original twelve API records and identify saved data in the UI. Detail pages also attempt the API during the static build and can use the same snapshot during an outage. Rebuild and redeploy when the API adds workouts or changes their details.
 
 ## Plan behavior
 
@@ -110,3 +110,7 @@ Home, all twelve Details URLs, My Plan, direct detail/plan reloads, mobile/table
 - [Assignment repository and design resources](https://github.com/ProgrammingHero1/B14-A6-Fit-Log)
 
 The implementation was copied in stages from the earlier FitLog project. The error recovery button was updated to use the installed Next.js version's `retry` API. Logo, banner, and design references come from the assignment; workout text and image URLs come from its API.
+
+## API outage recovery
+
+The supplied API returned HTTP 429 with Cloudflare’s temporary rate-limit page on 26 September 2026. The app still attempts the real API first. It falls back to `data/workouts.json`, recovered from an earlier successful API-backed static export, only on failure. The fallback includes all twelve workouts and their four instruction steps; its source is documented in `data/README.md`. Refresh retries the live API. Static detail pages require a rebuild to refresh. This preserves usability during an upstream outage; it does not make cached data a live API response.

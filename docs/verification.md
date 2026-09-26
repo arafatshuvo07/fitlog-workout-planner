@@ -42,3 +42,9 @@ Successful CI run: https://github.com/arafatshuvo07/fitlog-workout-planner/actio
 ### Limits
 
 This was a targeted deployment smoke check, not exhaustive testing of every browser or every possible state. The five-workout limit is covered by automated state tests; it was not re-exercised with five live entries in this session. The error recovery screen was not forced to fail in production. Pixel-perfect design parity is not claimed.
+
+## API outage fix
+
+The user reported the library error state. A direct request confirmed HTTP 429 with a Cloudflare temporary rate-limit page. Home, My Plan, and static detail generation now use a validated original-API snapshot on failure and label saved data.
+
+After this change, 19 tests and TypeScript passed, and a production export generated all 17 build entries despite the upstream outage. New tests cover live-response precedence, 403/429/503 failures, network errors, invalid/empty responses, cancellation, and not-found behavior. Live deployment verification follows the fix commit.

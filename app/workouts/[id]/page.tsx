@@ -1,24 +1,26 @@
 import type { Metadata } from "next";
 import { cache } from "react";
 import { notFound } from "next/navigation";
-import { fetchWorkout, fetchWorkouts } from "@/lib/workouts";
+import { loadWorkout, loadCatalog } from "@/lib/workout-catalog";
 import { WorkoutImage } from "@/components/workout-image";
 import { WorkoutActions } from "@/components/workout-actions";
 
 export const dynamicParams = false;
-const getWorkout = cache(fetchWorkout);
+const getWorkout = cache(loadWorkout);
 export async function generateStaticParams() {
-  return (await fetchWorkouts()).map((workout) => ({ id: String(workout.id) }));
+  return (await loadCatalog()).workouts.map((workout) => ({
+    id: String(workout.id),
+  }));
 }
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ id: string }>;
 }): Promise<Metadata> {
-  const workout = await getWorkout((await params).id);
+  const result = await getWorkout((await params).id);
   return {
-    title: workout?.name || "Workout not found",
-    description: workout?.description,
+    title: result?.workout.name || "Workout not found",
+    description: result?.workout.description,
   };
 }
 export default async function WorkoutPage({
@@ -26,8 +28,9 @@ export default async function WorkoutPage({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const workout = await getWorkout((await params).id);
-  if (!workout) notFound();
+  const result = await getWorkout((await params).id);
+  if (!result) notFound();
+  const { workout, source } = result;
   const specs = [
     ["Equipment", workout.equipment],
     ["Difficulty", workout.difficulty],
@@ -44,6 +47,12 @@ export default async function WorkoutPage({
           <WorkoutImage workout={workout} priority />
         </div>
         <section className="detail-info" aria-labelledby="workout-title">
+          {source === "saved" && (
+            <p className="refresh-notice" role="status">
+              Live details were unavailable when this page was built. Showing
+              saved workout details.
+            </p>
+          )}
           <h1 id="workout-title">{workout.name}</h1>
           <p className="detail-description">{workout.description}</p>
           <div className="tags">
